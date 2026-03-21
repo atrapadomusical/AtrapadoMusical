@@ -6,6 +6,7 @@
     <title>Atrapado Musical | Banda en Vivo para Bodas y Quinceañeras</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
@@ -13,6 +14,8 @@
             --black: #121212;
             --white: #ffffff;
             --overlay: rgba(0, 0, 0, 0.5); 
+            --tk-cyan: #25F4EE;
+            --tk-pink: #FE2C55;
         }
 
         body {
@@ -28,73 +31,135 @@
             scroll-behavior: smooth;
         }
 
-        /* --- Navigation --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+            background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
                               url('AM BUSINESS CARD TEMPLATE v2.png');
             background-attachment: fixed;
             background-size: cover;
             background-position: top center;
             border-bottom: 2px solid var(--gold); 
-            padding: 10px 5%;
+            padding: 4px 5%; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             box-sizing: border-box;
+            height: 70px; 
         }
 
-        .nav-left { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 60px; width: auto; } /* Slightly larger for desktop */
+        .nav-left { display: flex; align-items: center; gap: 12px; height: 100%; }
+        .logo-img { height: 54px; width: auto; display: block; } 
+        
         .nav-title {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1; 
         }
 
-        /* --- Sections --- */
-        section { padding: 140px 5% 60px; text-align: center; }
+        .btn-book-nav {
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .btn-book-nav:hover { background: var(--white); }
 
-        .hero { display: flex; flex-direction: column; align-items: center; }
+        /* --- Content Layout --- */
+        section { padding: 110px 5% 60px; text-align: center; }
 
-        /* --- Hero Band Image --- */
         .hero-band-img {
             width: 100%;
             max-width: 1440px; 
             height: auto;
             margin-bottom: 30px;
-            background-color: transparent; 
         }
 
-        /* --- Content Card (The Boxes) --- */
         .content-card {
             background: rgba(18, 18, 18, 0.94); 
-            padding: 40px; 
+            padding: 40px 30px; 
             border-radius: 15px;
-            max-width: 900px; /* Optimal desktop reading width */
+            max-width: 900px;
             margin: 0 auto;
             border: 1px solid var(--gold);
             box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* --- TITLES --- */
+        .music-title-container { margin-bottom: 10px; width: 100%; }
+        .music-title-main { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--gold); 
+            font-size: 2.4rem; 
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        .music-title-sub { 
+            font-family: 'Nunito', sans-serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: -5px 0 0 0; 
+            letter-spacing: 6px;
+        }
+
+        /* --- GOLD SOCIAL HEADING STYLING (FLIPPED) --- */
+        .social-heading-top {
+            font-family: 'Playfair Display', serif; 
+            color: var(--gold); 
+            font-size: 2.5rem; /* Massive, matching main headings */
+            margin: 25px 0 0 0; 
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .social-heading-main {
+            font-family: 'Nunito', sans-serif;
+            color: var(--gold);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: -3px 0 12px 0; /* Pulls it up close to the massive top line */
+            font-size: 1.6rem; /* Slightly smaller than top line */
+            letter-spacing: 5px; /* Tighter letter spacing to match Nunito style */
+            opacity: 0.9;
         }
 
         h2 { 
             font-family: 'Playfair Display', serif; 
             color: var(--gold); 
-            font-size: 2.5rem; /* Larger for desktop */
+            font-size: 2.5rem;
             margin: 0 auto 15px auto; 
             width: 100%;
             text-align: center;
-            white-space: nowrap; 
             letter-spacing: 1px;
         }
 
+        /* --- FORM STYLING --- */
+        form { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 600px; margin: 10px auto 0; }
+        .form-group { text-align: left; width: 100%; }
+        .form-label { display: block; font-weight: 700; color: var(--gold); margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
+        input, select, textarea { padding: 14px; border: 1px solid var(--gold); background: #1a1a1a; color: white; font-size: 16px; border-radius: 5px; width: 100%; box-sizing: border-box; }
+        input[type="date"] { color-scheme: dark; }
+        .submit-btn { background: var(--gold); color: var(--black); padding: 14px; font-weight: 800; border-radius: 5px; cursor: pointer; text-transform: uppercase; border: none; font-size: 1.2rem; letter-spacing: 1px; transition: 0.3s ease; }
+
+        /* --- VIDEO BOX --- */
         .video-box {
             position: relative;
             padding-bottom: 56.25%;
@@ -102,71 +167,37 @@
             overflow: hidden;
             margin: 10px auto 25px auto;
             width: 100%;
-            max-width: 750px; /* Bigger video for desktop */
+            max-width: 750px;
             border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
         }
         .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .btn-yt-more {
-            display: inline-block;
-            background: #FF0000;
-            color: white;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-        .btn-yt-more:hover { transform: scale(1.05); background: #cc0000; }
-
-        .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+        /* --- SOCIAL BUTTONS --- */
+        .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; width: 100%; }
         .social-btn {
-            color: var(--gold); text-decoration: none; font-weight: bold; border: 1px solid var(--gold);
-            padding: 12px 25px; border-radius: 5px; font-size: 1rem; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); text-decoration: none; font-weight: 800; border-radius: 12px; transition: all 0.3s ease;
+            padding: 18px 30px; font-size: 1.2rem; min-width: 210px;
         }
-        .social-btn:hover { background: var(--gold); color: var(--black); }
+        .social-btn i { font-size: 1.8rem; margin-right: 12px; }
+        .social-btn.fb { background: linear-gradient(45deg, #0062E0, #1877F2); }
+        .social-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-btn.tk { background: #010101; border: 1px solid rgba(255,255,255,0.15); }
+        .social-btn.tk i { color: #fff; text-shadow: -1px -1px 0 var(--tk-cyan), 1px 1px 0 var(--tk-pink); }
 
-        /* --- Form Elements --- */
-        form { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 600px; margin: 10px auto 0; text-align: left; }
-        input, select, textarea { 
-            padding: 16px; border: 1px solid var(--gold); background: #1a1a1a; 
-            color: white; font-size: 18px; border-radius: 5px; width: 100%; box-sizing: border-box;
-        }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; padding: 18px 30px; border-radius: 50px; font-weight: bold; z-index: 2000; text-decoration: none; }
 
-        .submit-btn {
-            background: var(--gold); color: var(--black); padding: 22px;
-            font-weight: 800; border-radius: 5px; cursor: pointer; 
-            text-transform: uppercase; border: none; font-size: 1.6rem; 
-            letter-spacing: 2px; transition: 0.3s ease;
-        }
-        .submit-btn:hover { background: var(--white); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(201, 168, 76, 0.4); }
-
-        .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px; background: #25D366;
-            color: white; padding: 18px 30px; border-radius: 50px; font-weight: bold; z-index: 2000;
-            text-decoration: none; font-size: 1.1rem; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        /* -----------------------------------------------------------
-           MOBILE OVERRIDES: Keeps your current mobile look exactly the same 
-           ----------------------------------------------------------- */
         @media (max-width: 768px) { 
-            section { padding: 110px 5% 40px; }
-            .logo-img { height: 50px; }
-            .nav-title { font-size: 1.1rem; } 
-            
-            .content-card { padding: 25px 20px 40px; max-width: 100%; }
-            h2 { font-size: 1.6rem; margin-bottom: 10px; }
-            
-            .video-box { max-width: 100%; margin-top: 5px; }
-            
-            input, select, textarea { font-size: 16px; padding: 14px; }
-            .submit-btn { font-size: 1.2rem; padding: 18px; }
-            
-            .whatsapp-float { bottom: 20px; right: 20px; padding: 15px 25px; font-size: 1rem; }
+            nav { height: 60px; padding: 4px 4%; }
+            .logo-img { height: 42px; }
+            .nav-title { font-size: 0.95rem; }
+            section { padding: 90px 5% 40px; }
+            .music-title-main { font-size: 1.8rem; }
+            .music-title-sub { font-size: 1.3rem; letter-spacing: 4px; }
+            .social-heading-top { font-size: 1.8rem; }
+            .social-heading-main { font-size: 1.2rem; letter-spacing: 3px; }
+            h2 { font-size: 1.8rem; }
+            .social-btn { padding: 14px 15px; font-size: 1.1rem; min-width: 140px; }
         }
     </style>
 </head>
@@ -177,46 +208,53 @@
             <img src="png am pic (Logo).png" alt="Atrapado Musical Logo" class="logo-img">
             <span class="nav-title">Atrapado Musical</span>
         </div>
-        <a href="#booking" class="btn-book" style="background: var(--gold); color: var(--black); padding: 10px 20px; font-weight: bold; border-radius: 5px; text-decoration: none; text-transform: uppercase; font-size: 0.8rem;">Book Us</a>
+        <a href="#booking" class="btn-book-nav">Contrátanos Aquí</a>
     </nav>
 
     <section class="hero">
         <img src="NEW YEARS OUTRO .png" alt="Atrapado Musical Banda" class="hero-band-img">
-        
         <div class="content-card">
             <h2>Nuestro Grupo</h2>
             <p style="font-size: 1.2rem; margin: 0 0 15px 0; line-height: 1.6;">¡Nos gusta hacer ruido y prender el ambiente! Tocamos con mucha pasión para que tu noche sea inolvidable.</p>
             
-            <p style="font-size: 1.6rem; color: var(--gold); font-weight: bold; text-shadow: 2px 2px 4px #000; margin: 0;">
-                Huapangos · Norteño · Cumbias · Zapateados
-            </p>
-            
+            <div style="margin: 0; line-height: 1.2;">
+                <p style="font-size: 1.6rem; color: var(--gold); font-weight: bold; text-shadow: 2px 2px 4px #000; margin: 0;">
+                    Huapangos · Norteño · Cumbias · Zapateados
+                </p>
+                <p style="font-size: 1.2rem; color: var(--gold); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin: 5px 0 0 0; opacity: 0.9;">
+                    y Más
+                </p>
+            </div>
+
             <div style="margin-top: 25px;">
-                <a href="tel:5408107095" style="background: white; color: black; border: 2px solid var(--gold); font-size: 1.1rem; padding: 14px 30px; font-weight: bold; text-decoration: none; border-radius: 5px; text-transform: uppercase;">📞 Llamar Ahora</a>
+                <a href="tel:5408107095" style="background: white; color: black; border: 2px solid var(--gold); font-size: 1.1rem; padding: 12px 25px; font-weight: bold; text-decoration: none; border-radius: 5px; text-transform: uppercase;">📞 Llamar Ahora</a>
             </div>
         </div>
     </section>
 
     <section id="media">
         <div class="content-card">
-            <h2>Nuestra Música en Vivo</h2>
+            <div class="music-title-container">
+                <div class="music-title-main">Nuestra Música</div>
+                <div class="music-title-sub">EN VIVO</div>
+            </div>
             
             <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; color: var(--gold); font-weight: bold; font-size: 0.9rem;">
                 <div style="width: 8px; height: 8px; background-color: #ff0000; border-radius: 50%; animation: pulse-red 1.5s infinite;"></div>
                 <span>Reproduciendo Ahora</span>
             </div>
-
             <div class="video-box">
                 <iframe src="https://www.youtube.com/embed/jZPuOT1JSAM?autoplay=1&mute=1&loop=1&playlist=jZPuOT1JSAM" frameborder="0" allowfullscreen></iframe>
             </div>
+            <a href="https://www.youtube.com/@AtrapadoMusical" target="_blank" style="display: inline-block; background: #FF0000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 25px;">🎥 Ver Más Videos</a>
             
-            <a href="https://www.youtube.com/@AtrapadoMusical" target="_blank" class="btn-yt-more">🎥 Ver Más Videos</a>
-            
-            <p style="font-weight: bold; color: var(--gold); margin: 10px 0 5px 0; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Síguenos en Redes Sociales</p>
+            <p class="social-heading-top">Síguenos en Las</p>
+            <p class="social-heading-main">Redes Sociales</p>
+
             <div class="social-links">
-                <a href="https://www.facebook.com/share/17vuyFtYk5/?mibextid=wwXIfr" target="_blank" class="social-btn">Facebook</a>
-                <a href="https://www.instagram.com/atrapadomusical" target="_blank" class="social-btn">Instagram</a>
-                <a href="https://www.tiktok.com/@atrapadomusical_" target="_blank" class="social-btn">TikTok</a>
+                <a href="https://www.facebook.com/share/17vuyFtYk5/?mibextid=wwXIfr" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://www.instagram.com/atrapadomusical" target="_blank" class="social-btn ig"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.tiktok.com/@atrapadomusical_" target="_blank" class="social-btn tk"><i class="fab fa-tiktok"></i> TikTok</a>
             </div>
         </div>
     </section>
@@ -233,8 +271,10 @@
                     <option value="Quinceañera">Quinceañera</option>
                     <option value="Fiesta">Fiesta Privada</option>
                 </select>
-                <p style="font-weight: bold; color: var(--gold); margin: 5px 0 0 0; font-size: 1rem;">Fecha del Evento:</p>
-                <input type="date" name="date" required>
+                <div class="form-group">
+                    <label class="form-label">Fecha del Evento:</label>
+                    <input type="date" name="date" required>
+                </div>
                 <textarea name="message" rows="4" placeholder="¿Dónde será tu evento?"></textarea>
                 <button type="submit" class="submit-btn">Enviar Solicitud 🎶</button>
             </form>
