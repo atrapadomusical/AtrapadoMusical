@@ -372,6 +372,19 @@
             max-width: 100%;
         }
 
+        /* Centering Desktop Reels */
+        @media (min-width: 1024px) {
+            .reels-grid {
+                justify-content: center;
+                overflow-x: visible;
+                flex-wrap: wrap;
+            }
+            .reel-card {
+                flex: 0 0 180px; /* Slightly bigger on desktop */
+                height: 320px;
+            }
+        }
+
         .reels-grid::-webkit-scrollbar {
             height: 6px;
         }
@@ -394,7 +407,8 @@
 
         .reel-card:hover {
             border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            transform: scale(1.05);
+            z-index: 10;
         }
 
         .reel-card video {
@@ -416,6 +430,55 @@
             color: var(--white);
             font-size: 0.7rem;
         }
+
+        /* LIGHTBOX OVERLAY FOR DESKTOP */
+        .reel-lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .reel-lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            height: 85vh;
+            aspect-ratio: 9/16;
+            max-width: 90vw;
+            background: #000;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+        }
+
+        .lightbox-content video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3001;
+            transition: var(--transition);
+        }
+
+        .close-lightbox:hover { color: var(--gold); transform: scale(1.2); }
 
         .social-row {
             display: flex;
@@ -636,6 +699,13 @@
 <body>
     <div class="page-bg"></div>
 
+    <div class="reel-lightbox" id="reelLightbox" onclick="closeReel()">
+        <i class="fas fa-times close-lightbox"></i>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <video id="lightboxVideo" controls autoplay></video>
+        </div>
+    </div>
+
     <nav id="navbar">
         <div class="container">
             <a href="#" class="logo-group">
@@ -670,7 +740,7 @@
                     <span class="section-subtitle">Sobre Nosotros</span>
                     <h2 class="section-title">Pasión, Ritmo y <span class="text-gold">Ambiente</span></h2>
                     <p style="margin-top: 20px; font-size: 1.1rem; color: rgba(255,255,255,0.7);">
-                        Somos especialistas en encender la fiesta. Con una trayectoria dedicada a eventos de cumpleaños, bodas y quinceañeras, garantizamos que nadie se quede sentado. 
+                        Somos especialistas en encender la pista. Con una trayectoria dedicada a eventos de gala, bodas y quinceañeras, garantizamos que nadie se quede sentado. 
                     </p>
                     <div class="genre-list">
                         <span class="genre-tag">Cumbias</span>
@@ -726,32 +796,32 @@
             </div>
 
             <div class="reels-grid">
-                <div class="reel-card reveal" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="openReel('reel1.mp4')">
                     <video autoplay loop muted playsinline preload="none">
                         <source src="reel1.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-expand"></i></div>
                 </div>
-                <div class="reel-card reveal" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="openReel('reel4.mp4')">
                     <video autoplay loop muted playsinline preload="none">
                         <source src="reel4.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-expand"></i></div>
                 </div>
-                <div class="reel-card reveal" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="openReel('reel3.mp4')">
                     <video autoplay loop muted playsinline preload="none">
                         <source src="reel3.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-expand"></i></div>
                 </div>
-                <div class="reel-card reveal" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="openReel('reel2.mp4')">
                     <video autoplay loop muted playsinline preload="none">
                         <source src="reel2.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-expand"></i></div>
                 </div>
             </div>
-            <p class="reveal" style="text-align: center; color: var(--gold); margin-top: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Presiona para Activar Audio 🎶</p>
+            <p class="reveal" style="text-align: center; color: var(--gold); margin-top: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Haz click para ver en Grande 🎶</p>
 
             <div class="section-title-group reveal" style="margin-top: 50px; margin-bottom: 20px;">
                 <span class="section-subtitle">Conéctate</span>
@@ -843,10 +913,7 @@
             }
         });
 
-        const observerOptions = {
-            threshold: 0.1
-        };
-
+        const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -859,25 +926,27 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        function toggleAudio(card) {
-            const video = card.querySelector('video');
-            const icon = card.querySelector('.audio-toggle i');
-            const allVideos = document.querySelectorAll('.reel-card video');
-            const allIcons = document.querySelectorAll('.audio-toggle i');
+        // DESKTOP REEL LIGHTBOX LOGIC
+        function openReel(videoSrc) {
+            const lightbox = document.getElementById('reelLightbox');
+            const lightboxVid = document.getElementById('lightboxVideo');
             const ytIframe = document.getElementById('mainYoutubeVideo');
 
-            if (video.muted) {
-                allVideos.forEach((v, index) => {
-                    v.muted = true;
-                    if(allIcons[index]) allIcons[index].className = 'fas fa-volume-mute';
-                });
-                video.muted = false;
-                icon.className = 'fas fa-volume-up';
-                ytIframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
-            } else {
-                video.muted = true;
-                icon.className = 'fas fa-volume-mute';
-            }
+            // Pause YouTube
+            ytIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+
+            lightboxVid.src = videoSrc;
+            lightboxVid.muted = false; // Unmute for focus
+            lightbox.classList.add('active');
+            lightboxVid.play();
+        }
+
+        function closeReel() {
+            const lightbox = document.getElementById('reelLightbox');
+            const lightboxVid = document.getElementById('lightboxVideo');
+            lightbox.classList.remove('active');
+            lightboxVid.pause();
+            lightboxVid.src = "";
         }
 
         const style = document.createElement('style');
