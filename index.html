@@ -48,7 +48,6 @@
             position: relative;
         }
 
-        /* Fixed Background for Performance */
         .page-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -64,7 +63,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* --- UTILITIES --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -93,7 +91,6 @@
             transform: translateY(0);
         }
 
-        /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0;
@@ -161,7 +158,6 @@
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
         }
 
-        /* --- HERO SECTION --- */
         .hero {
             position: relative;
             padding: 140px 0 20px 0;
@@ -267,7 +263,6 @@
             color: var(--black);
         }
 
-        /* --- ABOUT SECTION --- */
         .section-padding {
             padding: 120px 0;
             width: 100%;
@@ -307,7 +302,6 @@
             font-weight: 600;
         }
 
-        /* --- MEDIA SECTION --- */
         #media {
             margin: 0 auto;
             max-width: 90%;
@@ -365,7 +359,6 @@
             display: block;
         }
         
-        /* --- REELS HORIZONTAL SCROLL --- */
         .reels-grid {
             display: flex;
             gap: 15px;
@@ -424,7 +417,6 @@
             font-size: 0.7rem;
         }
 
-        /* --- SOCIAL BUTTONS --- */
         .social-row {
             display: flex;
             justify-content: center;
@@ -465,7 +457,6 @@
             filter: brightness(1.1);
         }
 
-        /* --- BOOKING FORM --- */
         .booking-section {
             background: linear-gradient(to bottom, var(--black), #121212);
             width: 100%;
@@ -544,7 +535,6 @@
             box-shadow: 0 20px 40px rgba(255,255,255,0.1);
         }
 
-        /* --- FOOTER --- */
         footer {
             padding: 80px 0 40px;
             text-align: center;
@@ -567,7 +557,6 @@
             margin-top: 40px;
         }
 
-        /* --- FLOATING BUTTONS --- */
         .whatsapp-float-premium {
             position: fixed;
             bottom: 40px;
@@ -611,7 +600,6 @@
             right: 90px;
         }
 
-        /* --- ANIMATIONS --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -622,7 +610,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
             .grid-2 { grid-template-columns: 1fr; gap: 40px; }
             .form-grid { grid-template-columns: 1fr; }
@@ -662,9 +649,9 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <p class="hero-subtitle">La Excelencia de Música en Vivo</p>
+                <p class="hero-subtitle">La Excelencia en Música en Vivo</p>
                 <h1 class="hero-title">Atrapado <span class="text-gold">Musical</span></h1>
-                <p class="hero-description">Transformamos tu evento en una celebración inolvidable con el mejor ambiente y los mejores ritmos de la Musica Méxicana.</p>
+                <p class="hero-description">Transformamos tu evento en una celebración inolvidable con el mejor ambiente y los mejores ritmos de México.</p>
                 <div class="hero-actions">
                     <a href="#booking" class="btn-cta-hero">Reservar Fecha</a>
                     <a href="tel:5408107095" class="btn-secondary"><i class="fas fa-phone"></i> Llamar Ahora</a>
@@ -683,7 +670,7 @@
                     <span class="section-subtitle">Sobre Nosotros</span>
                     <h2 class="section-title">Pasión, Ritmo y <span class="text-gold">Ambiente</span></h2>
                     <p style="margin-top: 20px; font-size: 1.1rem; color: rgba(255,255,255,0.7);">
-                        Somos especialistas en encender la fiesta. Con una trayectoria dedicada a eventos de gala, bodas y quinceañeras, garantizamos que nadie se quede sentado. 
+                        Somos especialistas en encender la pista. Con una trayectoria dedicada a eventos de gala, bodas y quinceañeras, garantizamos que nadie se quede sentado. 
                     </p>
                     <div class="genre-list">
                         <span class="genre-tag">Cumbias</span>
@@ -729,7 +716,7 @@
             </div>
 
             <div class="video-container reveal">
-                <iframe id="mainYoutubeVideo" src="https://www.youtube.com/embed/6AJFTQOrzC8?autoplay=1&mute=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe id="mainYoutubeVideo" src="https://www.youtube.com/embed/6AJFTQOrzC8?autoplay=1&mute=1&enablejsapi=1&vq=hd720&rel=0" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
             </div>
 
             <div style="text-align: center;" class="reveal">
@@ -740,25 +727,25 @@
 
             <div class="reels-grid">
                 <div class="reel-card reveal" onclick="toggleAudio(this)">
-                    <video autoplay loop muted playsinline preload="metadata">
+                    <video autoplay loop muted playsinline preload="none">
                         <source src="reel1.mp4" type="video/mp4">
                     </video>
                     <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
                 <div class="reel-card reveal" onclick="toggleAudio(this)">
-                    <video autoplay loop muted playsinline preload="metadata">
+                    <video autoplay loop muted playsinline preload="none">
                         <source src="reel4.mp4" type="video/mp4">
                     </video>
                     <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
                 <div class="reel-card reveal" onclick="toggleAudio(this)">
-                    <video autoplay loop muted playsinline preload="metadata">
+                    <video autoplay loop muted playsinline preload="none">
                         <source src="reel3.mp4" type="video/mp4">
                     </video>
                     <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
                 <div class="reel-card reveal" onclick="toggleAudio(this)">
-                    <video autoplay loop muted playsinline preload="metadata">
+                    <video autoplay loop muted playsinline preload="none">
                         <source src="reel2.mp4" type="video/mp4">
                     </video>
                     <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
@@ -864,6 +851,8 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    const video = entry.target.querySelector('video');
+                    if (video) video.play().catch(() => {});
                 }
             });
         }, observerOptions);
@@ -900,12 +889,6 @@
             }
         `;
         document.head.appendChild(style);
-
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.reel-card video').forEach(v => {
-                v.play().catch(() => console.log("Auto-play interaction needed"));
-            });
-        });
     </script>
 </body>
 </html>
