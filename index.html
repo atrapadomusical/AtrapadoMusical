@@ -2,389 +2,910 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atrapado Musical | Banda en Vivo para Bodas y Quinceañeras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Atrapado Musical | Banda en Vivo Premium para Eventos</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <meta name="description" content="Atrapado Musical - La mejor banda en vivo para bodas, quinceañeras y eventos privados. Cumbias, Norteño, Huapangos y más. ¡Reserva ahora!">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     
     <style>
         :root {
-            --gold: #C9A84C; 
-            --black: #121212;
-            --white: #ffffff;
-            --overlay: rgba(0, 0, 0, 0.5); 
+            --gold: #D4AF37;
+            --gold-bright: #F5D76E;
+            --black: #0A0A0A;
+            --onyx: #161616;
+            --white: #FFFFFF;
+            --glass: rgba(0, 0, 0, 0.85);
+            --glass-border: rgba(212, 175, 55, 0.3);
+            --glass-hover: rgba(212, 175, 55, 0.1);
             --tk-cyan: #25F4EE;
             --tk-pink: #FE2C55;
+            --transition: all 0.3s ease-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
-            margin: 0; padding: 0;
+            font-family: 'Outfit', sans-serif;
             background-color: var(--black);
             color: var(--white);
-            background-image: linear-gradient(var(--overlay), var(--overlay)), 
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Fixed Background for Performance */
+        .page-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                               url('AM BUSINESS CARD TEMPLATE v2.png');
-            background-attachment: fixed;
             background-size: cover;
             background-position: center;
-            scroll-behavior: smooth;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            width: 100%;
+        }
+
+        .text-gold { color: var(--gold); }
+        .bg-glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
-            top: 0; width: 100%;
-            background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
-                              url('AM BUSINESS CARD TEMPLATE v2.png');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: top center;
-            border-bottom: 2px solid var(--gold); 
-            padding: 4px 5%; 
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 12px 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            box-sizing: border-box;
-            height: 70px; 
         }
 
-        .nav-left { display: flex; align-items: center; gap: 12px; height: 100%; }
-        .logo-img { height: 54px; width: auto; display: block; } 
-        
-        .nav-title {
-            font-family: 'Playfair Display', serif;
-            color: var(--gold);
-            font-size: 1.25rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1; 
-        }
-
-        .btn-book-nav {
-            background: var(--gold);
-            color: var(--black);
-            padding: 8px 12px;
-            font-weight: bold;
-            border-radius: 5px;
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             text-decoration: none;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 1px;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            transition: 0.3s;
             white-space: nowrap;
         }
-        .btn-book-nav:hover { background: var(--white); }
 
-        /* --- Content Layout --- */
-        section { padding: 110px 5% 60px; text-align: center; }
-
-        .hero-band-img {
-            width: 100%;
-            max-width: 1440px; 
-            height: auto;
-            margin-bottom: 30px;
+        .btn-cta-nav {
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 16px; 
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            white-space: nowrap;
         }
 
-        .content-card {
-            background: rgba(18, 18, 18, 0.94); 
-            padding: 40px 30px; 
-            border-radius: 15px;
-            max-width: 900px;
-            margin: 0 auto;
-            border: 1px solid var(--gold);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        .btn-cta-nav:hover {
+            transform: translateY(-3px);
+            background: var(--white);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            padding: 140px 0 20px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-
-        /* --- TITLES --- */
-        .music-title-container { margin-bottom: 10px; width: 100%; }
-        .music-title-main { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--gold); 
-            font-size: 2.4rem; 
-            margin: 0;
-            letter-spacing: 1px;
-        }
-        .music-title-sub { 
-            font-family: 'Nunito', sans-serif;
-            color: var(--gold);
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: -5px 0 0 0; 
-            letter-spacing: 6px;
-        }
-
-        /* --- GOLD SOCIAL HEADING STYLING (FLIPPED) --- */
-        .social-heading-top {
-            font-family: 'Playfair Display', serif; 
-            color: var(--gold); 
-            font-size: 2.5rem; 
-            margin: 25px 0 0 0; 
+            justify-content: center;
             text-align: center;
-            letter-spacing: 1px;
-        }
-        .social-heading-main {
-            font-family: 'Nunito', sans-serif;
-            color: var(--gold);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: -3px 0 12px 0; 
-            font-size: 1.6rem; 
-            letter-spacing: 5px; 
-            opacity: 0.9;
-        }
-
-        h2 { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--gold); 
-            font-size: 2.5rem;
-            margin: 0 auto 15px auto; 
             width: 100%;
-            text-align: center;
-            letter-spacing: 1px;
         }
 
-        /* --- FORM STYLING --- */
-        form { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 600px; margin: 10px auto 0; }
-        .form-group { text-align: left; width: 100%; }
-        .form-label { display: block; font-weight: 700; color: var(--gold); margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
-        input, select, textarea { padding: 14px; border: 1px solid var(--gold); background: #1a1a1a; color: white; font-size: 16px; border-radius: 5px; width: 100%; box-sizing: border-box; }
-        input[type="date"] { color-scheme: dark; }
-        .submit-btn { background: var(--gold); color: var(--black); padding: 14px; font-weight: 800; border-radius: 5px; cursor: pointer; text-transform: uppercase; border: none; font-size: 1.2rem; letter-spacing: 1px; transition: 0.3s ease; }
-
-        /* --- VIDEO BOX --- */
-        .video-box {
+        .hero-content {
+            max-width: 900px;
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 10px auto 25px auto;
+            z-index: 10;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 1;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.2s backwards;
             width: 100%;
-            max-width: 750px;
-            border-radius: 10px;
         }
-        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* --- SOCIAL BUTTONS (SIDE-BY-SIDE) --- */
-        .social-links { 
-            display: flex; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            width: 100%; 
-            margin-bottom: 10px;
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255,255,255,0.9);
+            animation: fadeInUp 1s ease 0.4s backwards;
         }
-        .social-btn {
-            display: flex; align-items: center; justify-content: center;
-            color: var(--white); text-decoration: none; font-weight: 800; border-radius: 12px; transition: all 0.3s ease;
-            padding: 15px 10px; font-size: 1rem; flex: 1; min-width: 100px; max-width: 200px;
-        }
-        .social-btn i { font-size: 1.4rem; margin-right: 8px; }
-        .social-btn.fb { background: linear-gradient(45deg, #0062E0, #1877F2); }
-        .social-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .social-btn.tk { background: #010101; border: 1px solid rgba(255,255,255,0.15); }
-        .social-btn.tk i { color: #fff; text-shadow: -1px -1px 0 var(--tk-cyan), 1px 1px 0 var(--tk-pink); }
 
-        /* --- REELS GALLERY STYLING --- */
-        .reels-container {
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.6s backwards;
+            margin-bottom: 40px;
+        }
+
+        .hero-photo-container {
+            width: 100%;
+            max-width: 1100px;
+            animation: fadeInUp 1s ease 0.8s backwards;
+            position: relative;
+            z-index: 5;
+            margin-bottom: 0;
+        }
+
+        .hero-img-static {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+            display: block;
+        }
+
+        .btn-cta-hero {
+            background: var(--gold);
+            color: var(--black);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .section-padding {
+            padding: 120px 0;
+            width: 100%;
+        }
+
+        #about.section-padding {
+            padding-top: 40px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-card {
+            padding: 50px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .genre-list {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .genre-tag {
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--gold);
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* --- MEDIA SECTION --- */
+        #media {
+            margin: 0 auto;
+            max-width: 90%;
+            border-radius: 50px;
             display: flex;
             justify-content: center;
-            gap: 12px;
-            width: 100%;
-            margin: 25px 0 10px 0;
-            overflow-x: auto; 
-            padding-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
         }
-        .reel-card {
-            flex: 0 0 160px; 
-            height: 280px;  
-            border-radius: 10px;
-            border: 1.5px solid var(--gold);
+
+        .section-title-group {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+        }
+
+        #media .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            border-radius: 30px;
             overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 40px;
             background: #000;
             position: relative;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        /* --- REELS HORIZONTAL SCROLL --- */
+        .reels-grid {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .reels-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .reels-grid::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .reel-card {
+            flex: 0 0 130px;
+            height: 230px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
             cursor: pointer;
-            transform: translateZ(0);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
         }
-        .reel-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .audio-icon {
-            position: absolute; bottom: 10px; right: 10px;
-            background: rgba(0,0,0,0.6); color: white;
-            width: 30px; height: 30px; border-radius: 50%;
+
+        .reel-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .reel-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-toggle {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; pointer-events: none; border: 1px solid var(--gold);
+            color: var(--white);
+            font-size: 0.7rem;
         }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; padding: 18px 30px; border-radius: 50px; font-weight: bold; z-index: 2000; text-decoration: none; }
+        /* --- SOCIAL BUTTONS --- */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
 
-        @media (max-width: 768px) { 
-            nav { height: 60px; padding: 4px 4%; }
-            .logo-img { height: 42px; }
-            .nav-title { font-size: 0.95rem; }
-            section { padding: 90px 5% 40px; }
-            .music-title-main { font-size: 1.8rem; }
-            .music-title-sub { font-size: 1.3rem; letter-spacing: 4px; }
-            .social-heading-top { font-size: 1.8rem; }
-            .social-heading-main { font-size: 1.2rem; letter-spacing: 3px; }
-            h2 { font-size: 1.8rem; }
-            .social-btn { padding: 12px 5px; font-size: 0.8rem; }
-            .reel-card { flex: 0 0 140px; height: 240px; }
+        .social-btn-premium {
+            padding: 12px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            flex: 1;
+            max-width: 180px;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .social-btn-premium.fb { background: #1877F2; }
+        .social-btn-premium.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-btn-premium.tk { 
+            background: #000;
+            border: 1px solid var(--glass-border);
+        }
+        .social-btn-premium.tk i { 
+            text-shadow: -1px -1px 0 var(--tk-cyan), 1px 1px 0 var(--tk-pink);
+        }
+
+        .social-btn-premium:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* --- BOOKING FORM --- */
+        .booking-section {
+            background: linear-gradient(to bottom, var(--black), #121212);
+            width: 100%;
+        }
+
+        .form-card {
+            padding: 60px;
+            border-radius: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            padding: 16px 20px;
+            border-radius: 15px;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .submit-btn-premium {
+            width: 100%;
+            background: var(--gold);
+            color: var(--black);
+            padding: 20px;
+            border-radius: 15px;
+            border: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .submit-btn-premium:hover {
+            background: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            width: 100%;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 900;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        /* --- FLOATING BUTTONS --- */
+        .whatsapp-float-premium {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #25D366;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+            text-decoration: none;
+            z-index: 2000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float-premium:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .whatsapp-badge {
+            position: absolute;
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 15px;
+            border-radius: 20px;
+            right: 80px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float-premium:hover .whatsapp-badge {
+            opacity: 1;
+            right: 90px;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+
+        @media (max-width: 768px) {
+            nav .container { padding: 0 15px; }
+            .nav-brand { font-size: 1rem; }
+            .btn-cta-nav { padding: 6px 12px; font-size: 0.7rem; }
+            .section-title { font-size: 2.5rem; }
+            .section-padding { padding: 80px 0; }
+            #about.section-padding { padding-top: 20px; }
+            .form-card { padding: 30px; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .whatsapp-float-premium { width: 60px; height: 60px; bottom: 20px; right: 20px; font-size: 1.5rem; }
+            .whatsapp-badge { display: none; }
+            .reel-card { flex: 0 0 110px; height: 195px; }
+            .social-btn-premium { font-size: 0.75rem; padding: 10px 5px; min-width: auto; }
+            #media { margin: 0 15px; }
         }
     </style>
 </head>
 <body>
+    <div class="page-bg"></div>
 
-    <nav>
-        <div class="nav-left">
-            <img src="png am pic (Logo).png" alt="Atrapado Musical Logo" class="logo-img">
-            <span class="nav-title">Atrapado Musical</span>
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo-group">
+                <img src="png am pic (Logo).png" alt="Atrapado Musical Logo" class="logo-img">
+                <span class="nav-brand">Atrapado Musical</span>
+            </a>
+            <a href="#booking" class="btn-cta-nav">Contrátanos</a>
         </div>
-        <a href="#booking" class="btn-book-nav">Contrátanos Aquí</a>
     </nav>
 
     <section class="hero">
-        <img src="NEW YEARS OUTRO .png" alt="Atrapado Musical Banda" class="hero-band-img">
-        <div class="content-card">
-            <h2>Nuestro Grupo</h2>
-            <p style="font-size: 1.2rem; margin: 0 0 15px 0; line-height: 1.6;">¡Nos gusta hacer ruido y prender el ambiente! Tocamos con mucha pasión para que tu noche sea inolvidable.</p>
-            
-            <div style="margin: 0; line-height: 1.2;">
-                <p style="font-size: 1.6rem; color: var(--gold); font-weight: bold; text-shadow: 2px 2px 4px #000; margin: 0;">
-                    Cumbias · Norteño · Huapangos · Zapateados
-                </p>
-                <p style="font-size: 1.2rem; color: var(--gold); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin: 5px 0 0 0; opacity: 0.9;">
-                    y Más!
-                </p>
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">La Excelencia de Música en Vivo</p>
+                <h1 class="hero-title">Atrapado <span class="text-gold">Musical</span></h1>
+                <p class="hero-description">Transformamos tu evento en una celebración inolvidable con el mejor ambiente y los mejores ritmos de la Musica Méxicana.</p>
+                <div class="hero-actions">
+                    <a href="#booking" class="btn-cta-hero">Reservar Fecha</a>
+                    <a href="tel:5408107095" class="btn-secondary"><i class="fas fa-phone"></i> Llamar Ahora</a>
+                </div>
             </div>
-
-            <div style="margin-top: 25px;">
-                <a href="tel:5408107095" style="background: white; color: black; border: 2px solid var(--gold); font-size: 1.1rem; padding: 12px 25px; font-weight: bold; text-decoration: none; border-radius: 5px; text-transform: uppercase;">📞 Llamar Ahora</a>
+            <div class="hero-photo-container">
+                <img src="NEW YEARS OUTRO .png" alt="Atrapado Musical" class="hero-img-static">
             </div>
         </div>
     </section>
 
-    <section id="media">
-        <div class="content-card">
-            <div class="music-title-container">
-                <div class="music-title-main">Nuestra Música</div>
-                <div class="music-title-sub">EN VIVO</div>
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div class="reveal">
+                    <span class="section-subtitle">Sobre Nosotros</span>
+                    <h2 class="section-title">Pasión, Ritmo y <span class="text-gold">Ambiente</span></h2>
+                    <p style="margin-top: 20px; font-size: 1.1rem; color: rgba(255,255,255,0.7);">
+                        Somos especialistas en encender la fiesta. Con una trayectoria dedicada a eventos de gala, bodas y quinceañeras, garantizamos que nadie se quede sentado. 
+                    </p>
+                    <div class="genre-list">
+                        <span class="genre-tag">Cumbias</span>
+                        <span class="genre-tag">Norteño</span>
+                        <span class="genre-tag">Huapangos</span>
+                        <span class="genre-tag">Zapateados</span>
+                        <span class="genre-tag">¡Y Mucho Más!</span>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="about-card bg-glass">
+                        <h3 class="brand-font" style="font-size: 2rem; margin-bottom: 20px; color: var(--gold);">Tu Evento Ideal</h3>
+                        <p>Diseñamos el repertorio perfecto para cada momento de tu celebración. Desde la entrada triunfal hasta el clímax de la fiesta.</p>
+                        <div style="margin-top: 30px; display: flex; gap: 20px;">
+                            <div style="text-align: center;">
+                                <div class="text-gold" style="font-size: 2rem; font-weight: 800;">100%</div>
+                                <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">En Vivo</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="text-gold" style="font-size: 2rem; font-weight: 800;">Top</div>
+                                <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Sonido</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="text-gold" style="font-size: 2rem; font-weight: 800;">Elite</div>
+                                <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Ambiente</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; color: var(--gold); font-weight: bold; font-size: 0.9rem;">
-                <div style="width: 8px; height: 8px; background-color: #ff0000; border-radius: 50%; animation: pulse-red 1.5s infinite;"></div>
-                <span>Reproduciendo Ahora</span>
-            </div>
-            <div class="video-box">
-                <iframe src="https://www.youtube.com/embed/6AJFTQOrzC8?autoplay=1&mute=1&loop=1&playlist=6AJFTQOrzC8" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <a href="https://www.youtube.com/@AtrapadoMusical" target="_blank" style="display: inline-block; background: #FF0000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 25px;">🎥 Ver Más Videos</a>
-            
-            <p class="social-heading-top">Síguenos En Nuestras </p>
-            <p class="social-heading-main">Redes Sociales</p>
+        </div>
+    </section>
 
-            <div class="social-links">
-                <a href="https://www.facebook.com/share/17vuyFtYk5/?mibextid=wwXIfr" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i> Facebook</a>
-                <a href="https://www.instagram.com/atrapadomusical" target="_blank" class="social-btn ig"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://www.tiktok.com/@atrapadomusical_" target="_blank" class="social-btn tk"><i class="fab fa-tiktok"></i> TikTok</a>
+    <section id="media" class="section-padding bg-glass">
+        <div class="container">
+            <div class="section-title-group reveal">
+                <span class="section-subtitle">Nuestra Música</span>
+                <h2 class="section-title">Siente la <span class="text-gold">Energía</span></h2>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; color: #ff0000; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">
+                    <span style="width: 10px; height: 10px; background: #ff0000; border-radius: 50%; box-shadow: 0 0 10px #ff0000; animation: pulse 1.5s infinite;"></span>
+                    Reproduciendo Ahora
+                </div>
             </div>
 
-            <div class="reels-container">
-                <div class="reel-card" onclick="toggleAudio(this)">
+            <div class="video-container reveal">
+                <iframe id="mainYoutubeVideo" src="https://www.youtube.com/embed/6AJFTQOrzC8?autoplay=1&mute=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <div style="text-align: center;" class="reveal">
+                <a href="https://www.youtube.com/@AtrapadoMusical" target="_blank" class="btn-secondary" style="background: #ff0000; border: none; color: white;">
+                    <i class="fab fa-youtube"></i> Ver Más en YouTube
+                </a>
+            </div>
+
+            <div class="reels-grid">
+                <div class="reel-card reveal" onclick="toggleAudio(this)">
                     <video autoplay loop muted playsinline preload="metadata">
                         <source src="reel1.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-icon"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
-                <div class="reel-card" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="toggleAudio(this)">
                     <video autoplay loop muted playsinline preload="metadata">
                         <source src="reel4.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-icon"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
-                <div class="reel-card" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="toggleAudio(this)">
                     <video autoplay loop muted playsinline preload="metadata">
                         <source src="reel3.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-icon"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
-                <div class="reel-card" onclick="toggleAudio(this)">
+                <div class="reel-card reveal" onclick="toggleAudio(this)">
                     <video autoplay loop muted playsinline preload="metadata">
                         <source src="reel2.mp4" type="video/mp4">
                     </video>
-                    <div class="audio-icon"><i class="fas fa-volume-mute"></i></div>
+                    <div class="audio-toggle"><i class="fas fa-volume-mute"></i></div>
                 </div>
             </div>
-            <p style="color: var(--gold); font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; opacity: 0.6; margin-top: 5px;">Tocá un video para audio 🎶</p>
+            <p class="reveal" style="text-align: center; color: var(--gold); margin-top: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Presiona para Activar Audio 🎶</p>
+
+            <div class="section-title-group reveal" style="margin-top: 50px; margin-bottom: 20px;">
+                <span class="section-subtitle">Conéctate</span>
+                <h2 class="section-title">Redes <span class="text-gold">Sociales</span></h2>
+            </div>
+            
+            <div class="social-row reveal">
+                <a href="https://www.facebook.com/share/17vuyFtYk5/?mibextid=wwXIfr" target="_blank" class="social-btn-premium fb">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+                <a href="https://www.instagram.com/atrapadomusical" target="_blank" class="social-btn-premium ig">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@atrapadomusical_" target="_blank" class="social-btn-premium tk">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+            </div>
         </div>
     </section>
 
-    <section id="booking">
-        <div class="content-card">
-            <h2>Contrataciones</h2>
-            <form action="https://formspree.io/f/xyknvnza" method="POST">
-                <input type="text" name="name" placeholder="Nombre Completo" required>
-                <input type="tel" name="phone" placeholder="Teléfono" required>
-                <select name="event_type" required>
-                    <option value="" disabled selected>Tipo de Evento</option>
-                    <option value="Boda">Boda</option>
-                    <option value="Quinceañera">Quinceañera</option>
-                    <option value="Fiesta">Fiesta Privada</option>
-                </select>
-                <div class="form-group">
-                    <label class="form-label">Fecha del Evento:</label>
-                    <input type="date" name="date" required>
-                </div>
-                <textarea name="message" rows="4" placeholder="¿Dónde será tu evento?"></textarea>
-                <button type="submit" class="submit-btn">Enviar Solicitud 🎶</button>
-            </form>
+    <section id="booking" class="section-padding booking-section">
+        <div class="container">
+            <div class="section-title-group reveal">
+                <span class="section-subtitle">Contrataciones</span>
+                <h2 class="section-title">Reserva tu <span class="text-gold">Fecha</span></h2>
+                <p style="margin-top: 15px; color: rgba(255,255,255,0.6);">Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+            </div>
+
+            <div class="form-card bg-glass reveal">
+                <form action="https://formspree.io/f/xyknvnza" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" name="name" placeholder="Ej: Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" name="phone" placeholder="Ej: 540-810-7095" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Evento</label>
+                            <select name="event_type" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="Boda">Boda</option>
+                                <option value="Quinceañera">Quinceañera</option>
+                                <option value="Fiesta">Fiesta Privada</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha del Evento</label>
+                            <input type="date" name="date" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Lugar / Detalles del Evento</label>
+                            <textarea name="message" rows="4" placeholder="¿Dónde será tu evento? Cuéntanos más detalles..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn-premium">Enviar Solicitud 🎶</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <footer style="padding: 60px 0; color: #888; font-size: 0.9rem; text-align: center;">
-        <p>© 2026 Atrapado Musical. Todos los derechos reservados.</p>
+    <footer>
+        <div class="container">
+            <span class="footer-logo">Atrapado Musical</span>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px;">
+                <a href="#about" style="color: white; text-decoration: none;">Sobre Nosotros</a>
+                <a href="#media" style="color: white; text-decoration: none;">Galería</a>
+                <a href="#booking" style="color: white; text-decoration: none;">Contacto</a>
+            </div>
+            <p class="copyright">© 2026 Atrapado Musical. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <a href="https://wa.me/5408107095?text=Hola,%20quisiera%20reservar%20a%20Atrapado%20Musical" class="whatsapp-float" target="_blank">💬 WhatsApp</a>
+    <a href="https://wa.me/5408107095?text=Hola,%20quisiera%20reservar%20a%20Atrapado%20Musical" class="whatsapp-float-premium" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-badge">¡Hablemos por WhatsApp!</div>
+    </a>
 
     <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
         function toggleAudio(card) {
             const video = card.querySelector('video');
-            const icon = card.querySelector('.audio-icon i');
+            const icon = card.querySelector('.audio-toggle i');
             const allVideos = document.querySelectorAll('.reel-card video');
-            const allIcons = document.querySelectorAll('.audio-icon i');
+            const allIcons = document.querySelectorAll('.audio-toggle i');
+            const ytIframe = document.getElementById('mainYoutubeVideo');
 
             if (video.muted) {
-                // Mute others and unmute this one
                 allVideos.forEach((v, index) => {
                     v.muted = true;
                     if(allIcons[index]) allIcons[index].className = 'fas fa-volume-mute';
                 });
                 video.muted = false;
                 icon.className = 'fas fa-volume-up';
+                ytIframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
             } else {
-                // Mute this one
                 video.muted = true;
                 icon.className = 'fas fa-volume-mute';
             }
         }
-        
-        // Safety check to ensure they play on load
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.5); opacity: 0.5; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
         window.addEventListener('load', () => {
             document.querySelectorAll('.reel-card video').forEach(v => {
-                v.play().catch(e => {
-                    console.log("Auto-play requires mute or interaction");
-                });
+                v.play().catch(() => console.log("Auto-play interaction needed"));
             });
         });
     </script>
-
 </body>
 </html>
